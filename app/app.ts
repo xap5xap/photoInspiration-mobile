@@ -1,8 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {App, ionicBootstrap, Platform, Nav} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
-import {GettingStartedPage} from './pages/getting-started/getting-started';
-import {ListPage} from './pages/list/list';
 import {FlickrInterestingnessPage} from './pages/flickr-interestingness/flickr-interestingness';
 
 
@@ -20,7 +18,7 @@ class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Flickr', component: FlickrInterestingnessPage }      
+      { title: 'Flickr', component: FlickrInterestingnessPage }
     ];
 
   }
