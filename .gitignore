@@ -1,0 +1,17 @@
+# compiled output
+/www/build
+
+# dependencies
+/node_modules
+
+# platforms
+/platforms
+
+#plugins
+plugins
+
+#misc
+
+#System Files
+.DS_Store
+Thumbs.db
