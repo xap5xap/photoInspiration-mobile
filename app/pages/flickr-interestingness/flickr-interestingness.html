@@ -5,17 +5,19 @@
   Ionic pages and navigation.
 -->
 <ion-navbar *navbar>
-  <button menuToggle>
-    <ion-icon name="menu"></ion-icon>
-  </button>
-  <ion-title>flickr trending</ion-title>
+    <button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>flickr trending</ion-title>
 </ion-navbar>
 
 <ion-content padding class="flickr-interestingness">
-  <button (click)="loadInterestigness()">Load</button>
-  <ion-list *ngIf="fillData()">
-    <ion-item *ngFor="let photo of photosResponse.photos.photos">
-      <img src="{{photo.getSmall320ImageUrl()}}">
-    </ion-item>
-  </ion-list>
+    <button (click)="loadInterestigness()">Load</button>
+    <ion-list *ngIf="fillData()" no-lines >
+        <ion-item *ngFor="let photo of photosResponse.photos.photos" class="item-content">
+            <div class="images-parent">
+                <img src="{{photo.getSmall320ImageUrl()}}">
+            </div>
+        </ion-item>
+    </ion-list>
 </ion-content>
