@@ -16,6 +16,7 @@ import {PhotosResponse} from '../../models/photos-response'
 export class FlickrInterestingnessPage {
 
     photosResponse: PhotosResponse;
+    page: number = 1;
 
     constructor(public nav: NavController, private flickrService: FlickrService) { }
 
@@ -23,18 +24,31 @@ export class FlickrInterestingnessPage {
         return this.photosResponse ? true : false;
     }
 
-    loadInterestigness() {
-        this.flickrService.getInterestingness()
+    loadInterestigness(infiniteScroll, photosResponse) {
+
+        if ((this.photosResponse) && ((this.page - 1) === this.photosResponse.photos.pages)) {
+            console.log('ya termino');
+            if (infiniteScroll) {
+                infiniteScroll.complete();
+            }
+            return;
+        }
+        this.flickrService.getInterestingness(this.page, this.photosResponse)
             .subscribe(data => {
+
+                this.page = this.page + 1;
                 this.photosResponse = data;
-
-                console.log(`this.photosResponse ${this.photosResponse}`);
-                console.log(this.photosResponse);
-                console.log(`this.photosResponse.photos ${this.photosResponse.photos}`);
+                //
+                // console.log(`this.photosResponse ${this.photosResponse}`);
+                // console.log(this.photosResponse);
+                // console.log(`this.photosResponse.photos ${this.photosResponse.photos}`);
                 console.log(this.photosResponse.photos);
-                console.log(`this.photosResponse.photos.page ${this.photosResponse.photos.page}`);
-                console.log(`this.photosResponse.stat ${this.photosResponse.stat}`);
+                // console.log(`this.photosResponse.photos.page ${this.photosResponse.photos.page}`);
+                // console.log(`this.photosResponse.stat ${this.photosResponse.stat}`);
 
+                if (infiniteScroll) {
+                    infiniteScroll.complete();
+                }
 
             }
             );

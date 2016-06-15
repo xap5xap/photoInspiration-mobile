@@ -14,19 +14,22 @@ export class FlickrService {
 
     constructor(private http: Http) { }
 
-    getInterestingness(): Observable<PhotosResponse> {
+    getInterestingness(page: number, photosResponse: PhotosResponse): Observable<PhotosResponse> {
+
         let params = new URLSearchParams();
         params.set("method", "flickr.interestingness.getList");
         params.set("api_key", this.api_key);
         params.set("format", "json");
         params.set("nojsoncallback", "1");
+        params.set("per_page", "10");
+        params.set("page", page.toString());
 
         return this.http.get(this.url, { search: params })
             .map(response => response.json())
             .map((data: any) => {
-                console.log(`data ${data}`);
-                console.log(data);
-                console.log(`data.stat ${data.stat}`);
+                // console.log(`data ${data}`);
+                // console.log(data);
+                // console.log(`data.stat ${data.stat}`);
                 let photos: Photos;
                 let photosArray: Array<Photo> = [];
 
@@ -36,10 +39,18 @@ export class FlickrService {
                         photo.isfamily));
                 }
                 );
-
-                photos = new Photos(data.photos.page, data.photos.pages, data.photos.perpage,
-                    data.photos.total, photosArray);
-                return new PhotosResponse(photos, data.stat);
+                if (!photosResponse) {
+                    console.log('nuevo objeto');
+                    photos = new Photos(data.photos.page, data.photos.pages, data.photos.perpage,
+                        data.photos.total, photosArray);
+                    return new PhotosResponse(photos, data.stat);
+                }
+                else {
+                    console.log('reusa objeto');
+                    photosResponse.photos.page = data.photos.page;
+                    photosResponse.photos.photos = photosResponse.photos.photos.concat(photosArray);
+                    return photosResponse;
+                }
             }
             )
     }
