@@ -12,11 +12,12 @@
 </ion-navbar>
 
 <ion-content padding class="flickr-interestingness">
-    <button (click)="loadInterestigness()">Load</button>
     <ion-list *ngIf="fillData()" no-lines>
         <ion-item *ngFor="let photo of photosResponse.photos.photos" class="item-content">
             <div class="images-parent">
-                <img src="{{photo.getSmall320ImageUrl()}}">
+                <a (click)="goToPhotoPage(photo)">
+                    <img src="{{photo.getSmall320ImageUrl()}}">
+                </a>
             </div>
         </ion-item>
     </ion-list>

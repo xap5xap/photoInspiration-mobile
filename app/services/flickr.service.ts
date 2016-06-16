@@ -5,6 +5,7 @@ import {Photo} from '../models/photo'
 import {PhotosResponse} from '../models/photos-response'
 import '../rxjs-operators';
 import {Observable} from 'rxjs/Observable';
+import {PhotoInfo} from '../models/photo-info';
 
 
 @Injectable()
@@ -53,6 +54,25 @@ export class FlickrService {
                 }
             }
             )
+    }
+
+    getPhotoInfo(photo: Photo): Observable<PhotoInfo> {
+        let params = new URLSearchParams();
+        params.set("method", "flickr.photos.getInfo");
+        params.set("api_key", this.api_key);
+        params.set("format", "json");
+        params.set("nojsoncallback", "1");
+        params.set("photo_id", photo.id);
+        params.set("secret", photo.secret);
+        return this.http.get(this.url, { search: params })
+            .map(response => response.json())
+            .map((data: any) => {
+                console.log(`data ${data}`);
+                console.log(data);
+                console.log(`data.stat ${data.stat}`);
+
+                return null;
+            });
     }
 
 }
