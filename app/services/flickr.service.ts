@@ -6,6 +6,8 @@ import {PhotoOwner} from '../models/photo-owner';
 import {PhotoVisibility} from '../models/photo-visibility';
 import {PhotoDate} from '../models/photo-date';
 import {PhotoTag} from '../models/photo-tag';
+import {PhotoExif} from '../models/photo-exif';
+import {Exif} from '../models/exif';
 import {PhotoUrl} from '../models/photo-url';
 import {PhotoFavorite} from '../models/photo-favorite';
 import {PhotosResponse} from '../models/photos-response';
@@ -34,9 +36,6 @@ export class FlickrService {
         return this.http.get(this.url, { search: params })
             .map(response => response.json())
             .map((data: any) => {
-                // console.log(`data ${data}`);
-                // console.log(data);
-                // console.log(`data.stat ${data.stat}`);
                 let photos: Photos;
                 let photosArray: Array<Photo> = [];
 
@@ -73,9 +72,7 @@ export class FlickrService {
         return this.http.get(this.url, { search: params })
             .map(response => response.json())
             .map((data: any) => {
-                console.log(`data ${data}`);
-                console.log(data);
-                console.log(`data.stat ${data.stat}`);
+                console.log('Photo info', data);
                 let photoOwner: PhotoOwner = new PhotoOwner(data.photo.owner.nsid, data.photo.owner.username, data.photo.owner.realname, data.photo.owner.location, data.photo.owner.iconserver, data.photo.owner.iconfarm, data.photo.owner.path_alias);
                 let photoVisibility: PhotoVisibility = new PhotoVisibility(data.photo.visibility.isPublic, data.photo.visibility.isFriend, data.photo.visibility.isFamily);
                 let photoDates: PhotoDate = new PhotoDate(data.photo.dates.posted, data.photo.dates.taken, data.photo.dates.takenGranularity, data.photo.dates.takenUnknown, data.photo.dates.lastUpdate);
@@ -96,7 +93,7 @@ export class FlickrService {
             });
     }
 
-    getFavorites(photo: Photo) : Observable<PhotoFavorite> {
+    getFavorites(photo: Photo): Observable<PhotoFavorite> {
         let params = new URLSearchParams();
         params.set("method", "flickr.photos.getFavorites");
         params.set("api_key", this.api_key);
@@ -107,13 +104,36 @@ export class FlickrService {
         return this.http.get(this.url, { search: params })
             .map(response => response.json())
             .map((data: any) => {
-                console.log(`data ${data}`);
-                console.log(data);
-                console.log(`data.stat ${data.stat}`);
+                console.log('data favorites', data);
 
                 return new PhotoFavorite(data.photo.id, data.photo.secret, data.photo.server, data.photo.farm, data.photo.page, data.photo.pages, data.photo.perpage, data.photo.total);
             });
     }
 
+    getPhotoExif(photo: Photo): Observable<PhotoExif> {
+        let params = new URLSearchParams();
+        params.set("method", "flickr.photos.getExif");
+        params.set("api_key", this.api_key);
+        params.set("format", "json");
+        params.set("nojsoncallback", "1");
+        params.set("photo_id", photo.id);
+        params.set("secret", photo.secret);
+
+        return this.http.get(this.url, { search: params })
+            .map(response => response.json())
+            .map((data: any) => {
+                console.log('PhotoExif', data);
+                if (data.stat === "ok") {
+                    let exifArray: Array<Exif> = [];
+                    data.photo.exif.forEach(data => {
+                        console.log('Exif', data);
+                        let clean: string = data.clean ? data.clean._content : null;
+                        exifArray.push(new Exif(data.tag, data.label, data.raw._content, clean));
+                    });
+
+                    return new PhotoExif(data.photo.id, data.photo.secret, data.photo.server, data.photo.farm, data.photo.camera, exifArray);
+                }
+            });
+    }
 
 }
