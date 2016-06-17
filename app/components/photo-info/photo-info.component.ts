@@ -11,8 +11,7 @@ import {Photo} from '../../models/photo';
 */
 @Component({
     selector: 'photo-info',
-    templateUrl: 'build/components/photo-info/photo-info.component.html',
-    providers: [FlickrService]
+    templateUrl: 'build/components/photo-info/photo-info.component.html'    
 })
 export class PhotoInfoComponent {
     @Input()

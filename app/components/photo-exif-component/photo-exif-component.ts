@@ -10,8 +10,7 @@ import {PhotoExif} from '../../models/photo-exif';
 */
 @Component({
     selector: 'photo-exif-component',
-    templateUrl: 'build/components/photo-exif-component/photo-exif-component.html',
-    providers: [FlickrService]
+    templateUrl: 'build/components/photo-exif-component/photo-exif-component.html'    
 })
 export class PhotoExifComponent {
     @Input()

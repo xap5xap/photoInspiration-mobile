@@ -2,7 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {App, ionicBootstrap, Platform, Nav} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {FlickrInterestingnessPage} from './pages/flickr-interestingness/flickr-interestingness';
-
+import {FlickrService} from './services/flickr.service';
 
 @Component({
   templateUrl: 'build/app.html'
@@ -38,4 +38,4 @@ class MyApp {
   }
 }
 
-ionicBootstrap(MyApp);
+ionicBootstrap(MyApp,[FlickrService]);

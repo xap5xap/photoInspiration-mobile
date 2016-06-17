@@ -13,8 +13,7 @@ import {FlickrPhotoInfoPage} from '../flickr-photo-info/flickr-photo-info';
   Ionic pages and navigation.
 */
 @Component({
-    templateUrl: 'build/pages/flickr-interestingness/flickr-interestingness.html',
-    providers: [FlickrService]
+    templateUrl: 'build/pages/flickr-interestingness/flickr-interestingness.html'    
 })
 export class FlickrInterestingnessPage {
 
