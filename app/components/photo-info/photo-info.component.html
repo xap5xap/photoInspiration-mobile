@@ -1,0 +1,12 @@
+<div *ngIf="photoInfo">
+    <h2 text-center light [innerHTML]="photoInfo.title"></h2>
+    <hr />
+    <p light [innerHTML]="photoInfo.description"></p>
+    <hr>
+    <div text-center style="color:#f4f4f4">
+        {{photoInfo.views}} views &nbsp;&nbsp;&nbsp;{{photoInfo.comments}} comments &nbsp;&nbsp;&nbsp;
+        <div *ngIf="photoFavorite">
+            {{photoFavorite.total}} favorites
+        </div>
+    </div>
+</div>

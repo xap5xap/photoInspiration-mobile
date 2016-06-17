@@ -1,0 +1,5 @@
+<p light text-center *ngIf="photoExif">
+    {{photoExif.camera}}
+    <br /> {{photoExif.getFocalLenght()}}&nbsp;&nbsp;&nbsp;{{photoExif.getAperture()}}&nbsp;&nbsp;&nbsp;
+    {{photoExif.getExposure()}}&nbsp;&nbsp;&nbsp; {{photoExif.getISO()}}
+</p>
