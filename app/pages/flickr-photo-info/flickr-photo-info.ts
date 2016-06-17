@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams, ViewController} from 'ionic-angular';
 import {PhotoInfo} from '../../models/photo-info';
+import {PhotoExif} from '../../models/photo-exif';
 import {PhotoFavorite} from '../../models/photo-favorite';
 /*
   Generated class for the FlickrPhotoInfoPage page.
@@ -14,12 +15,14 @@ import {PhotoFavorite} from '../../models/photo-favorite';
 export class FlickrPhotoInfoPage {
     photoInfo: PhotoInfo;
     photoFavorite: PhotoFavorite;
+    photoExif: PhotoExif;
 
     constructor(public nav: NavController,
         public viewCtrl: ViewController,
         params: NavParams) {
         this.photoInfo = params.get("photoInfo");
         this.photoFavorite = params.get("photoFavorite")
+        this.photoExif = params.get("photoExif");
         console.log(this.photoInfo);
     }
 

@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Modal, NavParams, NavController} from 'ionic-angular';
 import {Photo} from '../../models/photo';
 import {PhotoInfo} from '../../models/photo-info';
+import {PhotoExif} from '../../models/photo-exif';
 import {PhotoFavorite} from '../../models/photo-favorite';
 import {FlickrPhotoInfoPage} from '../flickr-photo-info/flickr-photo-info';
 import {FlickrService} from '../../services/flickr.service';
@@ -21,6 +22,7 @@ export class FlickrPhotoPage {
     isOnToolbar: boolean = false;
     photoInfo: PhotoInfo;
     photoFavorite: PhotoFavorite;
+    photoExif: PhotoExif;
 
     constructor(public nav: NavController, public navParams: NavParams, private flickrService: FlickrService) {
         this.photo = navParams.data;
@@ -30,9 +32,10 @@ export class FlickrPhotoPage {
             photoInfo => this.photoInfo = photoInfo
         );
         this.flickrService.getFavorites(this.photo).subscribe(
-            photoFavorite => {this.photoFavorite = photoFavorite;
-            console.log('favoritos',this.photoFavorite);
-          }
+            photoFavorite => this.photoFavorite = photoFavorite
+        );
+        this.flickrService.getPhotoExif(this.photo).subscribe(
+            photoExif => this.photoExif = photoExif
         );
     }
 
@@ -42,7 +45,7 @@ export class FlickrPhotoPage {
 
     openInfoModal() {
         let infoModal = Modal.create(FlickrPhotoInfoPage,
-            { photoInfo: this.photoInfo, photoFavorite: this.photoFavorite });
+            { photoInfo: this.photoInfo, photoFavorite: this.photoFavorite, photoExif: this.photoExif });
         this.nav.present(infoModal);
     }
 }

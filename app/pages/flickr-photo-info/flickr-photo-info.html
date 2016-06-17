@@ -13,16 +13,20 @@
 </ion-navbar>
 
 <ion-content padding class="flickr-photo-info">
-    <h2 text-center light [innerHTML]="photoInfo.title"></h2>
+    <div *ngIf="photoInfo">
+        <h2 text-center light [innerHTML]="photoInfo.title"></h2>
+        <hr />
+        <p light [innerHTML]="photoInfo.description"></p>
+        <hr>
+        <p light text-center>
+            {{photoInfo.views}} views &nbsp;&nbsp;&nbsp;{{photoInfo.comments}} comments &nbsp;&nbsp;&nbsp;
+            {{photoFavorite.total}} favorites
+        </p>
+    </div>
     <hr />
-    <p light [innerHTML]="photoInfo.description"></p>
-    <hr >
-    <p light text-center>
-        {{photoInfo.views}} views &nbsp;&nbsp;&nbsp;{{photoInfo.comments}} comments &nbsp;&nbsp;&nbsp;
-        {{photoFavorite.total}} favorites
-    </p>
-    <hr />
-    <p light text-center>
-
+    <p light text-center *ngIf="photoExif">
+        {{photoExif.camera}}
+        <br /> {{photoExif.getFocalLenght()}}&nbsp;&nbsp;&nbsp;{{photoExif.getAperture()}}&nbsp;&nbsp;&nbsp;
+        {{photoExif.getExposure()}}&nbsp;&nbsp;&nbsp; {{photoExif.getISO()}}
     </p>
 </ion-content>
