@@ -6,10 +6,17 @@
 -->
 <ion-navbar [ngClass]="{hide: isOnToolbar}" *navbar dark>
     <ion-title>{{photo.title}}</ion-title>
+    <ion-buttons end>
+        <button (click)="openInfoModal()">
+            <ion-icon name="information-circle"></ion-icon>
+        </button>
+    </ion-buttons>
 </ion-navbar>
 
 <ion-content padding class="flickr-photo">
     <a (click)="toogleToolbar()">
-        <img class="centerImage" src="{{photo.getMedium800ImageUrl()}}">
+        <ion-scroll scrollX="true" scrollY="true" zoom="true" style="height:100%;">
+            <img class="centerImage" src="{{photo.getMedium800ImageUrl()}}">
+        </ion-scroll>
     </a>
 </ion-content>

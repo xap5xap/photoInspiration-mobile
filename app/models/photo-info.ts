@@ -22,10 +22,11 @@ export class PhotoInfo {
         public description: string,
         public visibility: PhotoVisibility,
         public dates: PhotoDate,
-        public view: string,
+        public views: string,
         public tags: Array<PhotoTag>,
-        public url: PhotoUrl,
-        public stat: string
+        public url: Array<PhotoUrl>,
+        public stat: string,
+        public comments: string
     ) { }
 
 }

@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
+import {NavController, Modal} from 'ionic-angular';
 import {FlickrService} from '../../services/flickr.service';
 import {PhotosResponse} from '../../models/photos-response'
 import {Photo} from '../../models/photo'
 import {FlickrPhotoPage} from '../flickr-photo/flickr-photo';
+import {FlickrPhotoInfoPage} from '../flickr-photo-info/flickr-photo-info';
 
 /*
   Generated class for the FlickrInterestingnessPage page.
@@ -35,7 +36,6 @@ export class FlickrInterestingnessPage {
     loadInterestigness(infiniteScroll) {
 
         if ((this.photosResponse) && ((this.page - 1) === this.photosResponse.photos.pages)) {
-            console.log('ya termino');
             if (infiniteScroll) {
                 infiniteScroll.complete();
             }
