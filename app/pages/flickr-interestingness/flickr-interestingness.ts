@@ -4,7 +4,8 @@ import {FlickrService} from '../../services/flickr.service';
 import {PhotosResponse} from '../../models/photos-response'
 import {Photo} from '../../models/photo'
 import {FlickrPhotoPage} from '../flickr-photo/flickr-photo';
-import {FlickrPhotoInfoPage} from '../flickr-photo-info/flickr-photo-info';
+import {PhotoFilterPage} from '../photo-filter/photo-filter';
+import {PhotoFilter} from '../../models/photo-filter';
 
 /*
   Generated class for the FlickrInterestingnessPage page.
@@ -13,10 +14,10 @@ import {FlickrPhotoInfoPage} from '../flickr-photo-info/flickr-photo-info';
   Ionic pages and navigation.
 */
 @Component({
-    templateUrl: 'build/pages/flickr-interestingness/flickr-interestingness.html'    
+    templateUrl: 'build/pages/flickr-interestingness/flickr-interestingness.html'
 })
 export class FlickrInterestingnessPage {
-
+    photoFilter: PhotoFilter;
     photosResponse: PhotosResponse;
     page: number = 1;
 
@@ -30,6 +31,17 @@ export class FlickrInterestingnessPage {
     }
     goToPhotoPage(photo: Photo) {
         this.nav.push(FlickrPhotoPage, photo);
+    }
+
+    presentFilter() {
+        let modal = Modal.create(PhotoFilterPage, this.photoFilter);
+        this.nav.present(modal);
+
+        modal.onDismiss((data: PhotoFilter) => {
+            if (data) {
+                this.photoFilter = data;
+            }
+        });
     }
 
     loadInterestigness(infiniteScroll) {
