@@ -11,7 +11,8 @@ import {PhotoFilter} from '../../models/photo-filter';
     templateUrl: 'build/pages/photo-filter/photo-filter.html',
 })
 export class PhotoFilterPage {
-    photoFilter: PhotoFilter
+    photoFilter: PhotoFilter;
+
     constructor(
         private navParams: NavParams,
         private viewCtrl: ViewController) {
@@ -19,7 +20,7 @@ export class PhotoFilterPage {
     }
 
     applyFilters() {
-        this.dismiss(this.photoFilter);
+       this.dismiss(this.photoFilter);
     }
 
     dismiss(data) {

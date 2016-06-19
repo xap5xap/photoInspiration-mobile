@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {Http, URLSearchParams} from '@angular/http';
 import {Photos} from '../models/photos';
 import {Photo} from '../models/photo';
+import {PhotoFilter} from '../models/photo-filter';
+import {FlickrError} from '../models/flickr-error';
 import {PhotoOwner} from '../models/photo-owner';
 import {PhotoVisibility} from '../models/photo-visibility';
 import {PhotoDate} from '../models/photo-date';
@@ -23,7 +25,7 @@ export class FlickrService {
 
     constructor(private http: Http) { }
 
-    getInterestingness(page: number, photosResponse: PhotosResponse): Observable<PhotosResponse> {
+    getInterestingness(page: number, photosResponse: PhotosResponse, photoFilter: PhotoFilter): Observable<PhotosResponse> {
 
         let params = new URLSearchParams();
         params.set("method", "flickr.interestingness.getList");
@@ -32,10 +34,14 @@ export class FlickrService {
         params.set("nojsoncallback", "1");
         params.set("per_page", "10");
         params.set("page", page.toString());
+        params.set("date", photoFilter.date);
 
         return this.http.get(this.url, { search: params })
             .map(response => response.json())
             .map((data: any) => {
+                if (data.stat === "fail") {
+                    throw new FlickrError(data.stat, data.code, data.message);
+                }
                 let photos: Photos;
                 let photosArray: Array<Photo> = [];
 

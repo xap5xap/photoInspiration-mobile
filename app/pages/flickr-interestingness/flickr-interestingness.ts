@@ -3,6 +3,7 @@ import {NavController, Modal} from 'ionic-angular';
 import {FlickrService} from '../../services/flickr.service';
 import {PhotosResponse} from '../../models/photos-response'
 import {Photo} from '../../models/photo'
+import {FlickrError} from '../../models/flickr-error'
 import {FlickrPhotoPage} from '../flickr-photo/flickr-photo';
 import {PhotoFilterPage} from '../photo-filter/photo-filter';
 import {PhotoFilter} from '../../models/photo-filter';
@@ -17,9 +18,10 @@ import {PhotoFilter} from '../../models/photo-filter';
     templateUrl: 'build/pages/flickr-interestingness/flickr-interestingness.html'
 })
 export class FlickrInterestingnessPage {
-    photoFilter: PhotoFilter;
+    photoFilter: PhotoFilter = new PhotoFilter();
     photosResponse: PhotosResponse;
     page: number = 1;
+    flickrError: FlickrError;
 
     constructor(public nav: NavController, private flickrService: FlickrService) { }
 
@@ -33,13 +35,21 @@ export class FlickrInterestingnessPage {
         this.nav.push(FlickrPhotoPage, photo);
     }
 
+    showError() {
+        if ((!this.photosResponse) && (this.flickrError)) {
+            return true;
+        }
+        return false;
+    }
     presentFilter() {
         let modal = Modal.create(PhotoFilterPage, this.photoFilter);
         this.nav.present(modal);
 
         modal.onDismiss((data: PhotoFilter) => {
             if (data) {
+                console.log('aplica objto', data);
                 this.photoFilter = data;
+                this.loadInterestigness(null);
             }
         });
     }
@@ -52,7 +62,7 @@ export class FlickrInterestingnessPage {
             }
             return;
         }
-        this.flickrService.getInterestingness(this.page, this.photosResponse)
+        this.flickrService.getInterestingness(this.page, this.photosResponse, this.photoFilter)
             .subscribe(data => {
 
                 this.page = this.page + 1;
@@ -69,6 +79,11 @@ export class FlickrInterestingnessPage {
                     infiniteScroll.complete();
                 }
 
+            },
+            error => {
+                console.log(error);
+                this.flickrError = error;
+                this.photosResponse = null;
             }
             );
     }

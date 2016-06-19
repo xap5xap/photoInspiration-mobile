@@ -14,6 +14,9 @@
 </ion-navbar>
 
 <ion-content padding class="flickr-interestingness">
+    <p light *ngIf="showError()">
+        {{flickrError.message}}
+    </p>
     <ion-list *ngIf="fillData()" no-lines>
         <ion-item *ngFor="let photo of photosResponse.photos.photos" class="item-content">
             <div class="images-parent">

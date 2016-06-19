@@ -19,5 +19,12 @@
 </ion-navbar>
 
 <ion-content padding class="photo-filter">
+    <ion-list no-lines>
+        <ion-item class="item-content">
+            <ion-icon name="calendar" item-left light></ion-icon>
+            <ion-label light>Date</ion-label>
+            <ion-datetime dark class="colorText" [(ngModel)]="photoFilter.date" displayFormat="MMM DD, YYYY"></ion-datetime>
+        </ion-item>
+    </ion-list>
 
 </ion-content>
