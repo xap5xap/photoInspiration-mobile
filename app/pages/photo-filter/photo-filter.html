@@ -23,7 +23,10 @@
         <ion-item class="item-content">
             <ion-icon name="calendar" item-left light></ion-icon>
             <ion-label light>Date</ion-label>
-            <ion-datetime dark class="colorText" [(ngModel)]="photoFilter.date" displayFormat="MMM DD, YYYY"></ion-datetime>
+            <ion-datetime dark class="colorText"
+            [(ngModel)]="photoFilter.date"
+             displayFormat="MMM DD, YYYY"
+             min="2006-01-01" [max]="maxDate()"></ion-datetime>
         </ion-item>
     </ion-list>
 

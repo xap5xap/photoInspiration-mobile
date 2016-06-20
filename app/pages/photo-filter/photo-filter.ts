@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {NavParams, ViewController} from 'ionic-angular';
 import {PhotoFilter} from '../../models/photo-filter';
+import {Utils} from '../../models/utils';
 /*
   Generated class for the PhotoFilterPage page.
 
@@ -20,10 +21,14 @@ export class PhotoFilterPage {
     }
 
     applyFilters() {
-       this.dismiss(this.photoFilter);
+        this.dismiss(this.photoFilter);
     }
 
     dismiss(data) {
         this.viewCtrl.dismiss(data);
+    }
+
+    maxDate(): string {
+        return Utils.yesterdayDateFormated();                
     }
 }

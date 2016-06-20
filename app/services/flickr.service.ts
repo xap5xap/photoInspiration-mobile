@@ -36,6 +36,8 @@ export class FlickrService {
         params.set("page", page.toString());
         params.set("date", photoFilter.date);
 
+        console.log('interesingness date', photoFilter.date);
+
         return this.http.get(this.url, { search: params })
             .map(response => response.json())
             .map((data: any) => {

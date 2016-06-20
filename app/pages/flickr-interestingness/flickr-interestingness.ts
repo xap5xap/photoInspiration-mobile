@@ -31,6 +31,7 @@ export class FlickrInterestingnessPage {
     onPageLoaded() {
         this.loadInterestigness(null);
     }
+
     goToPhotoPage(photo: Photo) {
         this.nav.push(FlickrPhotoPage, photo);
     }
@@ -47,11 +48,16 @@ export class FlickrInterestingnessPage {
 
         modal.onDismiss((data: PhotoFilter) => {
             if (data) {
-                console.log('aplica objto', data);
                 this.photoFilter = data;
+                this.resetObjects();
                 this.loadInterestigness(null);
             }
         });
+    }
+
+    resetObjects() {
+        this.page = 1;
+        this.photosResponse = null;
     }
 
     loadInterestigness(infiniteScroll) {
