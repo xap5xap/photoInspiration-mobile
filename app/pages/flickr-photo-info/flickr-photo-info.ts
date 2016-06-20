@@ -4,12 +4,7 @@ import {PhotoInfoComponent} from '../../components/photo-info/photo-info.compone
 import {PhotoExifComponent} from '../../components/photo-exif-component/photo-exif-component';
 import {Photo} from '../../models/photo';
 import {PhotoFavorite} from '../../models/photo-favorite';
-/*
-  Generated class for the FlickrPhotoInfoPage page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
     templateUrl: 'build/pages/flickr-photo-info/flickr-photo-info.html',
     directives: [PhotoInfoComponent, PhotoExifComponent]

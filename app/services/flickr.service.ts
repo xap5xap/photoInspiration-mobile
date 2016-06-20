@@ -36,8 +36,6 @@ export class FlickrService {
         params.set("page", page.toString());
         params.set("date", photoFilter.date);
 
-        console.log('interesingness date', photoFilter.date);
-
         return this.http.get(this.url, { search: params })
             .map(response => response.json())
             .map((data: any) => {
@@ -54,13 +52,11 @@ export class FlickrService {
                 }
                 );
                 if (!photosResponse) {
-                    console.log('nuevo objeto');
                     photos = new Photos(data.photos.page, data.photos.pages, data.photos.perpage,
                         data.photos.total, photosArray);
                     return new PhotosResponse(photos, data.stat);
                 }
                 else {
-                    console.log('reusa objeto');
                     photosResponse.photos.page = data.photos.page;
                     photosResponse.photos.photos = photosResponse.photos.photos.concat(photosArray);
                     return photosResponse;
@@ -80,7 +76,6 @@ export class FlickrService {
         return this.http.get(this.url, { search: params })
             .map(response => response.json())
             .map((data: any) => {
-                console.log('Photo info', data);
                 let photoOwner: PhotoOwner = new PhotoOwner(data.photo.owner.nsid, data.photo.owner.username, data.photo.owner.realname, data.photo.owner.location, data.photo.owner.iconserver, data.photo.owner.iconfarm, data.photo.owner.path_alias);
                 let photoVisibility: PhotoVisibility = new PhotoVisibility(data.photo.visibility.isPublic, data.photo.visibility.isFriend, data.photo.visibility.isFamily);
                 let photoDates: PhotoDate = new PhotoDate(data.photo.dates.posted, data.photo.dates.taken, data.photo.dates.takenGranularity, data.photo.dates.takenUnknown, data.photo.dates.lastUpdate);
@@ -112,8 +107,6 @@ export class FlickrService {
         return this.http.get(this.url, { search: params })
             .map(response => response.json())
             .map((data: any) => {
-                console.log('data favorites', data);
-
                 return new PhotoFavorite(data.photo.id, data.photo.secret, data.photo.server, data.photo.farm, data.photo.page, data.photo.pages, data.photo.perpage, data.photo.total);
             });
     }
@@ -130,11 +123,9 @@ export class FlickrService {
         return this.http.get(this.url, { search: params })
             .map(response => response.json())
             .map((data: any) => {
-                console.log('PhotoExif', data);
                 if (data.stat === "ok") {
                     let exifArray: Array<Exif> = [];
                     data.photo.exif.forEach(data => {
-                        console.log('Exif', data);
                         let clean: string = data.clean ? data.clean._content : null;
                         exifArray.push(new Exif(data.tag, data.label, data.raw._content, clean));
                     });

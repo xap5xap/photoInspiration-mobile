@@ -2,7 +2,7 @@
 <widget id="com.ionicframework.photoinspirationmobile505817" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Photo Inspiration</name>
   <description>Search for photography inspiration from the best photos of Flickr.</description>
-  <author email="xap5xap@gmail.com" href="http://ionicframework.com/">XAP Labs</author>
+  <author email="xap5xap@gmail.com" href="http://ionicframework.com/">Xavier Perez</author>
   <content src="index.html"/>
   <access origin="*"/>
   <allow-intent href="http://*/*"/>
@@ -39,7 +39,7 @@
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>
-  <preference name="android-minSdkVersion" value="16"/>
+  <preference name="android-minSdkVersion" value="19"/>
   <preference name="BackupWebStorage" value="none"/>
   <preference name="SplashScreen" value="screen"/>
   <preference name="SplashScreenDelay" value="3000"/>

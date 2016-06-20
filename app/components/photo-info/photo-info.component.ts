@@ -3,15 +3,10 @@ import {PhotoInfo} from '../../models/photo-info';
 import {PhotoFavorite} from '../../models/photo-favorite';
 import {FlickrService} from '../../services/flickr.service';
 import {Photo} from '../../models/photo';
-/*
-  Generated class for the PhotoInfo component.
 
-  See https://angular.io/docs/ts/latest/api/core/ComponentMetadata-class.html
-  for more info on Angular 2 Components.
-*/
 @Component({
     selector: 'photo-info',
-    templateUrl: 'build/components/photo-info/photo-info.component.html'    
+    templateUrl: 'build/components/photo-info/photo-info.component.html'
 })
 export class PhotoInfoComponent {
     @Input()
