@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.photoinspirationmobile505817" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.thexap.photoinspirationmobile" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Photo Inspiration</name>
   <description>Search for photography inspiration from the best photos of Flickr.</description>
-  <author email="xap5xap@gmail.com" href="http://ionicframework.com/">Xavier Perez</author>
+  <author email="xap5xap@gmail.com" href="https://thexap.com">theXap</author>
   <content src="index.html"/>
   <access origin="*"/>
   <allow-intent href="http://*/*"/>
