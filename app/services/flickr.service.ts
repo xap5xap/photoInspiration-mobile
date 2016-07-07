@@ -21,7 +21,7 @@ import {PhotoInfo} from '../models/photo-info';
 @Injectable()
 export class FlickrService {
     url: string = "https://api.flickr.com/services/rest/";
-    api_key: string = "api_key";
+    api_key: string = "c584696da5d036b8916605e7169e25e0";
 
     constructor(private http: Http) { }
 
